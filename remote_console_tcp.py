@@ -657,7 +657,7 @@ class FRPGUI:
 
         def on_click(e):
             # 决定公网地址的主机名
-            host = "r.e-service.vip" if SERVER_ADDR == DEFAULT_FRP_CONFIG['addr'] else SERVER_ADDR
+            host = "www.esun21.com" if SERVER_ADDR == DEFAULT_FRP_CONFIG['addr'] else SERVER_ADDR
             address = f"{host}:{remote_port}"
             self.root.clipboard_clear()
             self.root.clipboard_append(address)
