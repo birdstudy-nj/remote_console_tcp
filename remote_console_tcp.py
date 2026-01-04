@@ -8,7 +8,7 @@
   - 内置串口-TCP 桥接（无需额外工具）
 
 作者：Frank.Ni
-官网：无
+官网：www.esun21.com
 """
 
 import tkinter as tk
