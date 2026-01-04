@@ -1,3 +1,89 @@
+# 🌐 Remote Serial & TCP Controller GUI Tool (v1.2)
+
+> Expose local serial ports or internal TCP services (e.g., SSH, RDP) to the public internet—no public IP required! Powered by FRP.
+
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
+
+---
+
+## ✨ Key Features
+
+- **Remote Serial Port Access**: Map a local COM port (e.g., `COM3`) to a public TCP port. Connect via terminal tools like SecureCRT or PuTTY in **RAW mode**.
+- **TCP Tunneling**: One-click expose any internal TCP service (SSH, RDP, Winbox, etc.) through FRP.
+- **Built-in Serial-to-TCP Bridge**: No external tools (like `socat`) needed—bidirectional forwarding handled internally.
+- **External Configuration Support**: Customize your FRP server settings via an optional `config.ini` file.
+- **Graphical User Interface**: Clean, intuitive Tkinter-based UI with multi-connection management and real-time logging.
+- **Secure Temporary Configs**: FRP config files are auto-generated at runtime and cleaned up on exit.
+
+---
+
+## 📦 Getting Started
+
+### 1. Prerequisites
+
+- Windows OS (distributed as a standalone `.exe`)
+- A running FRP server (`frps`) with:
+    - Server IP address
+    - Communication port (default: `7000`)
+    - Authentication token
+
+### 2. First Run
+
+- (Optional) Create a `config.ini` file to specify your FRP server details (see format below).
+- Double-click to launch!
+
+> 💡 **Important Notes**:
+> 
+> - For serial connections, **set your terminal to RAW mode**.
+> - **PuTTY users**: Go to _Connection → Telnet → Local echo_ and _Local line editing_, and set both to **Force Off**.
+
+---
+
+## ⚙️ Configuration File: `config.ini` (Optional)
+
+If this file is missing, the program falls back to built-in defaults (which you can customize in source code).
+
+Ini Edit
+```
+[frp_server]
+frps_addr = your_frp_server_ip
+frps_port = 7000
+frps_token = your_secure_token_here
+```
+
+> 🔒 The program **never creates** this file automatically—it only reads it if present, ensuring security.
+
+---
+
+## 🖥️ UI Overview
+
+|Tab|Function|
+|---|---|
+|**Serial Mapping**|Select COM port & baud rate, assign a public port, and start remote serial access instantly|
+|**TCP Mapping**|Enter internal `IP:Port` (e.g., `192.168.1.100:22`); the tool suggests a public port (editable)|
+
+- **Active Connections Panel**: View all mappings with **Start / Stop / Remove** controls.
+- **Live Status Indicator**: Click the `[Running]` label to **copy the public address** (e.g., `www.esun21.com:3000`) to clipboard.
+- **Log Console**: Real-time display of data flow (serial ↔ TCP), FRP logs, and error messages.
+
+---
+
+## 🛠️ Development & Packaging
+
+Built with Python 3.8+ and the following stack:
+
+- `tkinter`: GUI framework
+- `pyserial`: Serial communication
+- `socketserver`: Built-in serial-TCP bridge
+- `subprocess`: Launches embedded `frpc.exe`
+- `PyInstaller`: Bundled into Windows executable
+
+---
+---
+---
+
 # 🌐 远程串口 & TCP 被控端 GUI 工具（v1.2）
 
 > 无需公网 IP，轻松将本地串口或内网 TCP 服务（如 SSH、RDP）通过 FRP 映射到公网！
@@ -80,89 +166,3 @@ Ini编辑
 - `socketserver`：串口-TCP 桥接
 - `subprocess`：调用 `frpc.exe`
 - `PyInstaller`：打包为文件 EXE
-
-
----
----
----
-# 🌐 Remote Serial & TCP Controller GUI Tool (v1.2)
-
-> Expose local serial ports or internal TCP services (e.g., SSH, RDP) to the public internet—no public IP required! Powered by FRP.
-
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-
-![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
-
----
-
-## ✨ Key Features
-
-- **Remote Serial Port Access**: Map a local COM port (e.g., `COM3`) to a public TCP port. Connect via terminal tools like SecureCRT or PuTTY in **RAW mode**.
-- **TCP Tunneling**: One-click expose any internal TCP service (SSH, RDP, Winbox, etc.) through FRP.
-- **Built-in Serial-to-TCP Bridge**: No external tools (like `socat`) needed—bidirectional forwarding handled internally.
-- **External Configuration Support**: Customize your FRP server settings via an optional `config.ini` file.
-- **Graphical User Interface**: Clean, intuitive Tkinter-based UI with multi-connection management and real-time logging.
-- **Secure Temporary Configs**: FRP config files are auto-generated at runtime and cleaned up on exit.
-
----
-
-## 📦 Getting Started
-
-### 1. Prerequisites
-
-- Windows OS (distributed as a standalone `.exe`)
-- A running FRP server (`frps`) with:
-    - Server IP address
-    - Communication port (default: `7000`)
-    - Authentication token
-
-### 2. First Run
-
-- (Optional) Create a `config.ini` file to specify your FRP server details (see format below).
-- Double-click to launch!
-
-> 💡 **Important Notes**:
-> 
-> - For serial connections, **set your terminal to RAW mode**.
-> - **PuTTY users**: Go to _Connection → Telnet → Local echo_ and _Local line editing_, and set both to **Force Off**.
-
----
-
-## ⚙️ Configuration File: `config.ini` (Optional)
-
-If this file is missing, the program falls back to built-in defaults (which you can customize in source code).
-
-Ini Edit
-```
-[frp_server]
-frps_addr = your_frp_server_ip
-frps_port = 7000
-frps_token = your_secure_token_here
-```
-
-> 🔒 The program **never creates** this file automatically—it only reads it if present, ensuring security.
-
----
-
-## 🖥️ UI Overview
-
-|Tab|Function|
-|---|---|
-|**Serial Mapping**|Select COM port & baud rate, assign a public port, and start remote serial access instantly|
-|**TCP Mapping**|Enter internal `IP:Port` (e.g., `192.168.1.100:22`); the tool suggests a public port (editable)|
-
-- **Active Connections Panel**: View all mappings with **Start / Stop / Remove** controls.
-- **Live Status Indicator**: Click the `[Running]` label to **copy the public address** (e.g., `www.esun21.com:3000`) to clipboard.
-- **Log Console**: Real-time display of data flow (serial ↔ TCP), FRP logs, and error messages.
-
----
-
-## 🛠️ Development & Packaging
-
-Built with Python 3.8+ and the following stack:
-
-- `tkinter`: GUI framework
-- `pyserial`: Serial communication
-- `socketserver`: Built-in serial-TCP bridge
-- `subprocess`: Launches embedded `frpc.exe`
-- `PyInstaller`: Bundled into Windows executable
