@@ -924,7 +924,7 @@ class FRPGUI:
         messagebox.showinfo(
             f"版本 {APP_VERSION}",
             f"作者：Frank.Ni\n"
-            f"官网：r.e-service.vip\n\n"
+            f"官网：www.esun21.com\n\n"
             f"【最近更新】\n{notes}"
         )
 
