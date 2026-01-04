@@ -1,4 +1,4 @@
-# 🌐 Remote Serial & TCP Controller GUI Tool (v1.2)
+# 🌐 Remote Console & TCP Controller GUI Tool (v1.2)
 
 > Expose local serial ports or internal TCP services (e.g., SSH, RDP) to the public internet—no public IP required! Powered by FRP.
 
